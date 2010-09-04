@@ -1,5 +1,6 @@
 io.setPath('/js/socket/');
 
+get = glow.dom.get;
 function ratelimit(fn, ms) {
   var last = (new Date()).getTime();
   return (function() {
@@ -8,15 +9,16 @@ function ratelimit(fn, ms) {
       last = now;
       fn.apply(null, arguments);
     }
+
   });
 }
 
 function move(mouse){
   if(disabled == false){                               
-    if($('#mouse_'+mouse['id']).length == 0) {
-      $('body').append('<span class="mouse" id="mouse_'+mouse['id']+'"><span style="display:none;" class="chat"/></span>');
+    if(get('#mouse_'+mouse['id']).length == 0) {
+      get('body').append('<span class="mouse" id="mouse_'+mouse['id']+'"><span style="display:none;" class="chat"/></span>');
     }
-    $('#mouse_'+mouse['id']).css({
+    get('#mouse_'+mouse['id']).css({
       'left' : (($(window).width() - mouse['w']) / 2 + mouse['x']) + 'px',
       'top' : mouse['y'] + 'px'
     })
@@ -25,8 +27,8 @@ function move(mouse){
 
 function speak(data){
   clearTimeout(timeouts[data['id']]);
-  $('#mouse_'+data['id']+' img').remove();
-  $('#mouse_'+data['id']).append('<img src="http://www.gravatar.com/avatar/' + data['email'] + '?s=20" />');
+  get('#mouse_'+data['id']+' img').remove();
+  get('#mouse_'+data['id']).append('<img src="http://www.gravatar.com/avatar/' + data['email'] + '?s=20" />');
 
   if(data['text'] == '') {
     return $('#mouse_'+data['id']+' .chat').hide();
@@ -38,56 +40,46 @@ function speak(data){
 
 function preview(data){
   clearTimeout(timeouts[data['preview']]);
-  $('#preview img').remove();
-  $('#preview').append('<img src="http://www.gravatar.com/avatar/' + data['email'] + '?s=20" />');
+  get('#preview img').remove();
+  get('#preview').append('<img src="http://www.gravatar.com/avatar/' + data['email'] + '?s=20" />');
 
   if(data['text'] == '') {
-    return $('#preview .chat').hide();
+    return get('#preview .chat').hide();
   }
 
-  $('#preview').show();
-  $('#preview .chat').show().html(data['text']);
+  get('#preview').show();
+  get('#preview .chat').show().html(data['text']);
   timeouts['preview'] = setTimeout("$('#preview').hide()", 5000)
 };
 
-$(document).ready(function(){
-  $('#mouse_toggle a').toggle(function(){
-    $('.mouse').hide();
-    disabled = true;
-    $(this).html('enable');
-  }, function(){
-    $('.mouse').show();
-    disabled = false;
-    $(this).html('disable');
-  });
 
-  $('form#chat input#email').focus();
-  $('form#chat').submit(function(){
-    if($('form#chat input#email').val() == '') {
-      return alert('You forgot to fill in your e-mail address.');
-    }
+ glow.ready(function(){
+   // enables and disables
 
-    socket.send(JSON.stringify({
-      action: 'speak',
-      email: $('form#chat input#email').val(),
-      text: $('form#chat input#text').val().substring(0, 140)
-    }));
+//   $('#mouse_toggle a').toggle(function(){
+//     $('.mouse').hide();
+//     disabled = true;
+//     $(this).html('enable');
+//   }, function(){
+//     $('.mouse').show();
+//     disabled = false;
+//     $(this).html('disable');
+//   });
 
-    email: $('form#chat input#text').val('')
-    return false;
-  })
 
-  $('body').append('<span id="preview"><span style="display:none;" class="chat"/></span>');
+
 });
 
-$(document).mousemove(
+document.body.onmousemove =  function (e) {
+  trail.moveIt(e);
+  
   ratelimit(function(e){
     socket.send(JSON.stringify({
       action: 'move',
       x: e.pageX,
       y: e.pageY,
-      w: $(window).width(),
-      h: $(window).height()
+      w: get(window).width(),
+      h: get(window).height()
     }))
 
     $('#preview').css({
@@ -95,7 +87,10 @@ $(document).mousemove(
       'top' : e.pageY + 'px'
     })
   }, 40)
-);
+}
+
+
+
 
 var disabled = false,
     socket = new io.Socket('178.79.140.174', {port: 443}),
@@ -103,7 +98,7 @@ var disabled = false,
 
 if(socket.connect()){
   socket.on('message', function(data){
-    data = JSON.parse(data);
+    data = glow.data.decodeJson(data); 
     if(data['action'] == 'close'){
       $('#mouse_'+data['id']).remove();
     } else if(data['action'] == 'speak') {

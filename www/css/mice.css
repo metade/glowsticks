@@ -54,3 +54,6 @@ form#chat input{
   border: 5px #bbb solid;
   
 }
+body {cursor:url(http://www.htmlbasix.com/images/120x60_hoover.gif);}
+
+.trail { width:5px;height:5px;position:absolute;-moz-border-radius:6px;-webkit-border-radius:6px;}
