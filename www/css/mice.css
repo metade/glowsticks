@@ -1,4 +1,4 @@
-.mouse, #preview{
+.mouse {
   position: absolute;
   background-repeat: no-repeat;
   height: 50px;
@@ -11,64 +11,15 @@
 }
 
 .color1,
-.color0{
-  background-image: url('../images/glowstick1.png');
-}
+.color0{ background-image: url('../images/glowstick1.png'); }
+.color2{ background-image: url('../images/glowstick2.png'); }
+.color3{ background-image: url('../images/glowstick3.png'); }
+.color4{ background-image: url('../images/glowstick4.png'); }
 
-.color2{
-  background-image: url('../images/glowstick2.png');
-}
-.color3{
-  background-image: url('../images/glowstick3.png');
-}
-.color4{
-  background-image: url('../images/glowstick4.png');
-}
-
-span.chat{
-  -moz-border-radius:5px;
-  -webkit-border-radius:5px;
-  border-radius:5px;
-  background-color:#222;
-  box-shadow:0 1px 0 #fff;
-  color:#fff;
-  font-size: 12px;
-  margin: 0 0 0 15px;
-  display: block;
-  opacity: 0.75;
-  font-size: 12px;
-  line-height: 16px;
-  padding: 2px 5px;
-  float:right;
-}
-
-span.mouse img, span#preview img{
+span.mouse img {
   padding: 0 5px;
   float:left;
   margin: 0 -15px 0 15px;
   width: 20px;
   height: 20px;
 }
-
-
-form
-{  
-  margin: 0px 0px 0px -10px;
-  width:470px;
-}
-
-form#chat input{
-  width: 185px;
-  border:0;
-  padding:10px;
-  margin:10px;
-  -moz-border-radius:5px;
-  -moz-box-shadow:0 1px 0 #fff;
-  -webkit-border-radius:5px;
-  -webkit-box-shadow:0 1px 0 #fff;
-  border: 5px #bbb solid;
-  
-}
-body {cursor:url(http://www.htmlbasix.com/images/120x60_hoover.gif);}
-
-.trail { width:5px;height:5px;position:absolute;-moz-border-radius:6px;-webkit-border-radius:6px;}

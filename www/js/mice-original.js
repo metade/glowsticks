@@ -1,4 +1,4 @@
-io.setPath('/js/socket/');
+io.setPath('/~sinclp01/glowsticks/www/js/vendor/');
 
 function ratelimit(fn, ms) {
   var last = (new Date()).getTime();

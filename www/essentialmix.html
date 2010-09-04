@@ -698,17 +698,17 @@ glow.onDomReady(function() {
           //<![CDATA[
           glow.ready(function(){
             emp.setWidth("512");
-            emp.setHeight("146");
-            emp.set("config_settings_skin", "black");
+            emp.setHeight("106");
             emp.setDomId("emp");
             emp.setPlaylist("http://www.bbc.co.uk/iplayer/playlist/b00tkmsh");
+            emp.set("config_settings_skin", "black");
             emp.set("config_settings_displayMode", "audio");
+            emp.set("config_settings_autoPlay", true);
             emp.write();
-            setTimeout(function(){ emp.call("play"); }, 1000);
           });
           //]]>
         </script>
-        <p><div id="emp" class="sc-emp-embed-audio skin-black" style="margin: 14px;"><!--v--></div></p>
+        <div id="emp" class="sc-emp-embed-audio skin-black" style="margin: 14px;"></div>
       </div>
     </div>
   </div><!--/col-a-->
@@ -800,7 +800,6 @@ glow.onDomReady(function() {
 
 <script src="js/socket/socket.io.js"></script>
 <script src="js/mice.js"></script> 
-<script src="js/trail.js"></script> 
 
 <link rel="stylesheet" href="css/mice.css"/>
 

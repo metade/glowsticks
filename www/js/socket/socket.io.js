@@ -16,7 +16,7 @@ this.io = {
 		// this is temporary until we get a fix for injecting Flash WebSocket javascript files dynamically,
 		// as io.js shouldn't be aware of specific transports.
 		if ('WebSocket' in window){
-			WebSocket.__swfLocation = path + 'lob/vendor/web-socket-js/WebSocketMain.swf';
+			WebSocket.__swfLocation = path + 'web-socket-js/WebSocketMain.swf';
 		}
 	}
 };

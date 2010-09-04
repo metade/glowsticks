@@ -1,12 +1,16 @@
 io.setPath('/js/socket/');
 
 get = glow.dom.get;
+glow.ready(function(){
+});
+
 function throttle(method,e, scope) {
-    clearTimeout(method._tId);
-    method._tId= setTimeout(function(){
-        method(e)
+  clearTimeout(method._tId);
+  method._tId= setTimeout(function(){
+    method(e)
     }, 40);
 }
+
 function move(mouse){
   if(disabled == false){                               
     if(get('#mouse_'+mouse['id']).length == 0) {
@@ -21,30 +25,7 @@ function move(mouse){
   }
 };
 
-
-
-
-
- glow.ready(function(){
-   // enables and disables
-
-//   $('#mouse_toggle a').toggle(function(){
-//     $('.mouse').hide();
-//     disabled = true;
-//     $(this).html('enable');
-//   }, function(){
-//     $('.mouse').show();
-//     disabled = false;
-//     $(this).html('disable');
-//   });
-
-
-
-});
-
 document.body.onmousemove =  function (e) {
-  trail.moveIt(e);
-  
   var send = function(e){
     socket.send(glow.data.encodeJson({
       action: 'move',
@@ -53,13 +34,8 @@ document.body.onmousemove =  function (e) {
       w: get(window).width(),
       h: get(window).height()
     }))};
-throttle(send,e,window);
-
-
+  throttle(send,e,window);
 }
-
-
-
 
 var disabled = false,
     socket = new io.Socket('178.79.140.174', {port: 443}),
@@ -70,12 +46,6 @@ if(socket.connect()){
     data = glow.data.decodeJson(data); 
     if(data['action'] == 'close'){
       get('#mouse_'+data['id']).remove();
-    } else if(data['action'] == 'speak') {
-      if(data['id']) {
-        speak(data);
-      } else {
-        preview(data);
-      }
     } else if(data['action'] == 'move'){
       move(data);
     };
