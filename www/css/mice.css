@@ -1,13 +1,28 @@
 .mouse, #preview{
   position: absolute;
   background-repeat: no-repeat;
-  height: 22px;
-  min-width: 15px;
+  height: 50px;
+  min-width: 40px;
   z-index: 100;
 }
 
 .mouse{
   background-image: url('../images/cursor.png');
+}
+
+.color1,
+.color0{
+  background-image: url('../images/glowstick1.png');
+}
+
+.color2{
+  background-image: url('../images/glowstick2.png');
+}
+.color3{
+  background-image: url('../images/glowstick3.png');
+}
+.color4{
+  background-image: url('../images/glowstick4.png');
 }
 
 span.chat{
