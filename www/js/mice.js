@@ -98,7 +98,7 @@ $(document).mousemove(
 );
 
 var disabled = false,
-    socket = new io.Socket('localhost', {port: 8000}),
+    socket = new io.Socket('178.79.140.174', {port: 443}),
     timeouts = {};
 
 if(socket.connect()){
