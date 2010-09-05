@@ -1,8 +1,8 @@
 .mouse {
   position: absolute;
   background-repeat: no-repeat;
-  height: 50px;
-  min-width: 40px;
+  height: 45px;
+  min-width: 55px;
   z-index: 100;
 }
 
@@ -10,11 +10,11 @@
   background-image: url('../images/cursor.png');
 }
 
-.color1,
-.color0{ background-image: url('../images/glowstick1.png'); }
-.color2{ background-image: url('../images/glowstick2.png'); }
-.color3{ background-image: url('../images/glowstick3.png'); }
-.color4{ background-image: url('../images/glowstick4.png'); }
+.color0{ background-image: url('../images/yellow.gif'); }
+.color1{ background-image: url('../images/purple.gif'); }
+.color2{ background-image: url('../images/green.gif'); }
+.color3{ background-image: url('../images/pink.gif'); }
+.color4{ background-image: url('../images/yellow.gif'); }
 
 span.mouse img {
   padding: 0 5px;
@@ -22,4 +22,11 @@ span.mouse img {
   margin: 0 -15px 0 15px;
   width: 20px;
   height: 20px;
+}
+
+#cursor {
+  height:45px;
+  min-width:55px;
+  position:absolute;
+  background-image: url('../images/yellow.gif');
 }

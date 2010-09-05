@@ -1,7 +1,9 @@
-io.setPath('/js/socket/');
+io.setPath('/radio1/essentialmix/glowsticks/js/vendor/');
 
 get = glow.dom.get;
 glow.ready(function(){
+  get('body').append("<div id='cursor'>&nbsp;</div>");
+  get('body').css({ 'cursor' : 'none'});
 });
 
 function throttle(method,e, scope) {
@@ -11,8 +13,12 @@ function throttle(method,e, scope) {
     }, 40);
 }
 
+function glowstick_cursor(e) {
+  get('#cursor').css({ 'left' : (e.pageX - 30) + 'px', 'top' : (e.pageY-50) + 'px'});
+}
+
 function move(mouse){
-  if(disabled == false){                               
+  if (disabled == false) {
     if(get('#mouse_'+mouse['id']).length == 0) {
       var cssClass = 'color' + parseInt(Math.random()*4);
       get('body').append('<span class="mouse ' +  cssClass + '" id="mouse_'+mouse['id']+'"><span style="display:none;" class="chat"/></span>');
@@ -21,11 +27,11 @@ function move(mouse){
       'left' : ((get(window).width() - mouse['w']) / 2 + mouse['x']) + 'px',
       'top' : mouse['y'] + 'px'
     })
-    trail({pageX: mouse['x'],pageY: mouse['y'] });
   }
 };
 
 document.body.onmousemove =  function (e) {
+  glowstick_cursor(e);
   var send = function(e){
     socket.send(glow.data.encodeJson({
       action: 'move',
